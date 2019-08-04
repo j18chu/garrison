@@ -5,7 +5,7 @@ import quest
 import item
 import random
 import reward
-
+import location
 
 oldMan = questGiver.QuestGiver("Old Man", "Doesn't matter where I came from. Doesn't matter where you came from, for that matter. All that matters is you're here to help me.",
 	[quest.Quest('Destroy the Brush',
@@ -17,22 +17,18 @@ oldMan = questGiver.QuestGiver("Old Man", "Doesn't matter where I came from. Doe
 	lambda player : player.inventory.removeGrass(12))],
 	'shorePath')
 
+class Shore(location.Location):
+	def __init__(self):
+		location.Location.__init__(self, "shore", "coast", "The first thing you feel when you awake is a splitting headache. You slowly open your eyes, taking in the sand below you, the palm trees ringing your vision, and the small\ncrabs scuttling around you. You shut your eyes and massage your temples, trying to recall what happened. The last thing you remember was sailing the Blue Seas with your crew, being\nuniversally feared, and then the crash. You open your eyes up again, this time noticing the wreckage around you.\n")
 
-def firstShore():
-	input.printInput(['The first thing you feel when you awake is a splitting headache. You slowly open your eyes, taking in the sand below you, the palm trees ringing your vision, and the small', 'crabs scuttling around you. You shut your eyes and massage your temples, trying to recall what happened. The last thing you remember was sailing the Blue Seas with your crew, being', 'universally feared, and then the crash. You open your eyes up again, this time noticing the wreckage around you.', ' '])
-	inp = input.inputLines(['Explore the wreckage', 'Close your eyes for a little longer'])
-	if (inp == 1):
-		globals.player.location = 'secondShore'
-	elif (inp == 2):
-		print('While you rest, a group of savages appear on the beach. Grotesquely dressed, they creep up on you. The one with the mask, clearly the leader, motions them towards you. No one hears your scream as they pummel you.')
-		globals.player.location = 'death'
-	elif type(inp) == str:
-		return
-	else:
-		input.error(2)
+	def update(self):
+		input.printInput("The first thing you feel when you awake is a splitting headache. You slowly open your eyes, taking in the sand below you, the palm trees ringing your vision, and the small crabs scuttling around you. You shut your eyes and massage your temples, trying to recall what happened. The last thing you remember was sailing the Blue Seas with your crew, being universally feared, and then the crash. You open your eyes up again, this time noticing the wreckage around you.")
+		location.locationChange([['Explore the wreckage', 'secondShore', ''], ['Close your eyes for a little longer', 'death', 'While you rest, a group of savages appear on the beach. Grotesquely dressed, they creep up on you. The one with the mask, clearly the leader, motions them towards you. No one hears your scream as they pummel you.']])
+
+shore = Shore()
 
 def secondShore():
-	input.printInput(['You walk around until you notice a plank of wood, larger than the rest. You turn it over and it reveals a name: The S.S. Furybringer. You finally remember who you were. You', 'were a notorious captain who was as fearsome as he was cunning. You were able to recruit followers and pillage entire islands. You sigh, thinking about how all this is behind you.\nYou notice a path ahead of you.', ''])
+	input.printInput('You walk around until you notice a plank of wood, larger than the rest. You turn it over and it reveals a name: The S.S. Furybringer. You finally remember who you were. You were a notorious captain who was as fearsome as he was cunning. You were able to recruit followers and pillage entire islands. You sigh, thinking about how all this is behind you. You notice a path ahead of you.')
 	inp = input.inputLines(['Stay near the shore', 'Walk the path in front of you'])
 	if (inp == 1):
 		print("The tide slowly inches towards you. Out of nowhere, a giant shark eats you in one big gulp! You are dead.")
@@ -45,7 +41,7 @@ def secondShore():
 		input.error(2)
 
 def shorePath():
-	input.printInput(["You start walking towards the path, when you stop in disbelief. An old wizened man with a long, gnarled cane is staring back at you. He motions that you should join him,", "but you are wary. You finish walking along the beach to the beginning of the path.", ""])
+	input.printInput("You start walking towards the path, when you stop in disbelief. An old wizened man with a long, gnarled cane is staring back at you. He motions that you should join him,but you are wary. You finish walking along the beach to the beginning of the path.")
 	inp = input.inputLines(['Talk to the old man', 'Continue along the path'])
 	if (inp == 1):
 		oldMan.openName()
@@ -137,7 +133,7 @@ def climbHill():
 				
 
 def footOfHill():
-	print("You are at the bottom of a massive hill. You can see at the summit, a hill of grass.You stare up ahead at the top, your goal.")
+	input.printInput("You are at the bottom of a massive hill. You can see at the summit, a hill of grass.You stare up ahead at the top, your goal.")
 	inp = input.inputLines(['Go back to the shore', 'Start climbing'])
 	if (inp == 1):
 		globals.player.location = 'shorePath'
@@ -150,7 +146,7 @@ def footOfHill():
 
 
 def grassHill():
-	input.printInput(["After a long and arduous climb, you finally reach the summit. You think to yourself: this would make a nice outpost.", ""])
+	input.printInput("After a long and arduous climb, you finally reach the summit. You think to yourself: this would make a nice outpost.")
 	if len(globals.player.inventory.quests) == 1 and globals.player.inventory.grass < 16:
 		inp = input.inputLines(['Whack the grass', 'Go back down the hill'])
 		if (inp == 1):
@@ -176,7 +172,7 @@ def grassHill():
 def shoreStart(isStart):
 	while isStart and globals.player.alive == True:
 		if globals.player.location == 'firstShore':
-			firstShore()
+			shore.update()
 		elif globals.player.location == 'secondShore':
 			secondShore()
 		elif globals.player.location == 'shorePath':

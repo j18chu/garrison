@@ -33,3 +33,8 @@ class Player(entity.Entity):
 			self.inventory.reputation -= 2000
 			print("You have become friendly with the Pirate's Alliance. As a token of their generosity, they gave 50 gold and 100 experience, as well as a cool looking hat.")
 			reward = reward.Reward("Pirate's Alliance", 100, 50, 0, [item.Item("old pirate hat", "old but still gold", 22, 35)])
+
+	def update(self):
+		self.location.update()
+		self.levelUp()
+		self.reputationUp()

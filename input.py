@@ -1,5 +1,21 @@
 import globals
 
+
+def printInput(str):
+	width = 150
+	line = ""
+	currentWord = 0
+	arr = str.split()
+	while currentWord < len(arr):
+		if len(arr[currentWord]) + len(line) > width:
+			print(line)
+			line = ""
+		line += arr[currentWord] + " "
+		currentWord += 1
+	if len(line) > 0:
+		print(line)
+	print(" ")
+
 def intOrStr(var):
 	try:
 		return int(input(var))
@@ -7,27 +23,22 @@ def intOrStr(var):
 	except:
 		print('Please enter a number')
 		
-
-def printInput(array):
-	for i in array:
-		print(i)
-
 def inputPrompt(prompt):
 	return intOrStr(f"<{prompt}> ")
 
-def addInt(upperBound, arrOfSuggestions):
-	arr = []
-	for i in range(1, upperBound+1):
-		arr.append(f'{i}: {arrOfSuggestions[i-1]}')
-	printInput(arr)
+def addInt(arrOfSuggestions, map):
+	for i in range(len(arrOfSuggestions)):		
+		print (f'{i + 1}: {map(arrOfSuggestions[i])}')
 
 # Most important
-def inputLines(arr):
-	addInt(len(arr), arr)
+def inputLines(arr, map = lambda obj: str(obj)):
+	addInt(arr, map)
 	print(" ")
 	output = inputPrompt("turn")
 	globals.player.turn += 1
-	printInput([" ", "______________________________________________________________________________________", f"										Turn {globals.player.turn}", ""])
+	print(" ")
+	print('_' * 86)
+	print(f' 										Turn {globals.player.turn} \n')
 	return output
 # Most important
 
