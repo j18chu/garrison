@@ -12,12 +12,12 @@ class Player(entity.Entity):
 		self.alive = True
 		self.level = 1
 		self.turn = 0
+		self.pLocation = ""
 
 		self.levelExperience = [100, 200, 400, 1000, 1500, 2000, 2500, 3000]
 
 	def die(self):
-		arr = ["", "Game Over"]
-		'\n'.join(arr)
+		print(" \nGame Over")
 		self.alive = False
 
 	def levelUp(self):

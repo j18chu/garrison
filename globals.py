@@ -2,4 +2,4 @@ import player
 import inventory
 
 global player
-player = player.Player(100, 'firstShore', inventory.Inventory())
+player = player.Player(100, 'The Forgotten Shore', inventory.Inventory())

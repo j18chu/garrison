@@ -38,13 +38,12 @@ class Inventory:
 		back = False
 		endNum = 0
 		inpScavenge = 0
-		while endNum <= maxHarvest and back == False:
+		while endNum < maxHarvest and back == False:
 			arr = []
 			scavenge = False
 			arr1 = copy.copy(optionScavenge)
 			arr2 = copy.copy(optionNothing)
 			while len(arr) != numDuds:
-				
 				
 				if random.randint(1, 3) == 3 and scavenge == False:
 					rand1 = arr1[random.randint(0, len(arr1)-1)]
@@ -75,7 +74,9 @@ class Inventory:
 					else:
 						endNum += i
 						break
-				if endNum >= maxHarvest:
+
+				if endNum > maxHarvest:
+					endNum = maxHarvest
 					print(f"In total, you scavenged {endNum} logs")	
 				else:
 					print(f'You scavenged {i} logs.')
@@ -94,83 +95,84 @@ class Inventory:
 			else:
 				print("Due to your relaxation, you did not collect any logs.")
 		self.logs += endNum
-
+		return endNum
 
 #scavengeLogs(2, 4, 15, 5, ["Chop down a tree", "Collect driftwood", "Scavenge for sticks"], ["Relax", "Sit down", "Do nothing", "Fall asleep", "Daydream", "Think about how many rest phrases I can come up with", "Contemplate life", "Stop", "Watch a large, red beetle"])
 
 
 	def scavengeStone(self, minimum, maximum, maxHarvest, numDuds, optionScavenge, optionNothing):
-		back = False
-		endNum = 0
-		inpScavenge = 0
-		while endNum <= maxHarvest and back == False:
-			arr = []
-			scavenge = False
-			arr1 = copy.copy(optionScavenge)
-			arr2 = copy.copy(optionNothing)
-			while len(arr) != numDuds:
-				
-				
-				if random.randint(1, 3) == 3 and scavenge == False:
-					rand1 = arr1[random.randint(0, len(arr1)-1)]
-					arr.append(rand1)
-					arr1.remove(rand1)
-					inpScavenge = len(arr)
-					scavenge = True
-				elif len(arr) == numDuds - 1 and scavenge == False:
-					rand1 = arr1[random.randint(0, len(arr1)-1)]
-					arr.append(rand1)
-					arr1.remove(rand1)
+			back = False
+			endNum = 0
+			inpScavenge = 0
+			while endNum < maxHarvest and back == False:
+				arr = []
+				scavenge = False
+				arr1 = copy.copy(optionScavenge)
+				arr2 = copy.copy(optionNothing)
+				while len(arr) != numDuds:
+					
+					if random.randint(1, 3) == 3 and scavenge == False:
+						rand1 = arr1[random.randint(0, len(arr1)-1)]
+						arr.append(rand1)
+						arr1.remove(rand1)
+						inpScavenge = len(arr)
+						scavenge = True
+					elif len(arr) == numDuds - 1 and scavenge == False:
+						rand1 = arr1[random.randint(0, len(arr1)-1)]
+						arr.append(rand1)
+						arr1.remove(rand1)
 
-					inpScavenge = len(arr)
+						inpScavenge = len(arr)
 
-				else:
-					rand2 = arr2[random.randint(0, len(arr2)-1)]
-					arr.append(rand2)
-					arr2.remove(rand2)
-
-			arr.append('Back')
-			inp = input.inputLines(arr)
-
-			if inp == inpScavenge:
-				i = minimum
-				while i < maximum:
-					if (random.randint(1,3) == 1):
-						i += 1
 					else:
-						endNum += i
-						break
-				if endNum >= maxHarvest:
-					print(f"In total, you scavenged {endNum} stone")	
+						rand2 = arr2[random.randint(0, len(arr2)-1)]
+						arr.append(rand2)
+						arr2.remove(rand2)
+
+				arr.append('Back')
+				inp = input.inputLines(arr)
+
+				if inp == inpScavenge:
+					i = minimum
+					while i < maximum:
+						if (random.randint(1,3) == 1):
+							i += 1
+						else:
+							endNum += i
+							break
+
+					if endNum > maxHarvest:
+						endNum = maxHarvest
+						print(f"In total, you scavenged {endNum} stone")	
+					else:
+						print(f'You scavenged {i} stone.')
+				elif inp == len(arr):
+					if endNum == 1:
+						print(f'In total, you scavenged {endNum} stone.')
+						back = True
+					elif endNum == 0:
+						print("You did not scavenge anything")
+						back = True
+					else:
+						print(f'In total, you scavenged {endNum} stone.')
+						back = True
+					
+					break
 				else:
-					print(f'You scavenged {i} stone.')
-			elif inp == len(arr):
-				if endNum == 1:
-					print(f'In total, you scavenged {endNum} stone.')
-					back = True
-				elif endNum == 0:
-					print("You did not scavenge anything")
-					back = True
-				else:
-					print(f'In total, you scavenged {endNum} stone.')
-					back = True
-				
-				break
-			else:
-				print("Due to your relaxation, you did not collect any stone.")
-		self.stone += endNum
+					print("Due to your relaxation, you did not collect any stone.")
+			self.stone += endNum
+			return endNum
 
 	def scavengeGrass(self, minimum, maximum, maxHarvest, numDuds, optionScavenge, optionNothing):
 		back = False
 		endNum = 0
 		inpScavenge = 0
-		while endNum <= maxHarvest and back == False:
+		while endNum < maxHarvest and back == False:
 			arr = []
 			scavenge = False
 			arr1 = copy.copy(optionScavenge)
 			arr2 = copy.copy(optionNothing)
 			while len(arr) != numDuds:
-				
 				
 				if random.randint(1, 3) == 3 and scavenge == False:
 					rand1 = arr1[random.randint(0, len(arr1)-1)]
@@ -201,13 +203,15 @@ class Inventory:
 					else:
 						endNum += i
 						break
-				if endNum >= maxHarvest:
+
+				if endNum > maxHarvest:
+					endNum = maxHarvest
 					print(f"In total, you scavenged {endNum} grass")	
 				else:
 					print(f'You scavenged {i} grass.')
 			elif inp == len(arr):
 				if endNum == 1:
-					print(f'In total, you scavenged {endNum} log.')
+					print(f'In total, you scavenged {endNum} grass.')
 					back = True
 				elif endNum == 0:
 					print("You did not scavenge anything")
@@ -220,6 +224,7 @@ class Inventory:
 			else:
 				print("Due to your relaxation, you did not collect any grass.")
 		self.grass += endNum
+		return endNum
 
 
 	def addExperience(self, amount):
@@ -287,3 +292,6 @@ class Inventory:
 						self.items.remove(item)
 					return True
 				return False
+
+
+I = Inventory()

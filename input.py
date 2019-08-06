@@ -23,6 +23,10 @@ def intOrStr(var):
 	except:
 		print('Please enter a number')
 		
+def locationInLine():
+	string = globals.player.location
+	print(string)
+
 def inputPrompt(prompt):
 	return intOrStr(f"<{prompt}> ")
 
@@ -36,12 +40,11 @@ def inputLines(arr, map = lambda obj: str(obj)):
 	print(" ")
 	output = inputPrompt("turn")
 	globals.player.turn += 1
+	while output > len(arr):
+		print(f"Please enter a number between 1 and {len(arr)}.")
+		output = inputPrompt("turn")
 	print(" ")
 	print('_' * 86)
 	print(f' 										Turn {globals.player.turn} \n')
 	return output
 # Most important
-
-def error(int):
-	print(f"Error: Please enter a value between 1 and {int}")
-

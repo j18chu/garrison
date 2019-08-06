@@ -13,10 +13,11 @@ class QuestGiver():
 		self.showOpenText = False
 		self.isSame = False
 
-	def locationBack(self, location):
+	def locationBack(self):
 		globals.player.location = self.pLocation
 
-	def openName(self):
+
+	def update(self):
 		
 		arr = []
 		isSame = True
@@ -50,7 +51,4 @@ class QuestGiver():
 				self.openName()
 			i+=1
 		if inp == (i+1):
-			locationBack(self.pLocation)
-
-			
-
+			locationBack()
