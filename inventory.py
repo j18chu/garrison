@@ -78,6 +78,8 @@ class Inventory:
 				if endNum > maxHarvest:
 					endNum = maxHarvest
 					print(f"In total, you scavenged {endNum} logs")	
+				elif endNum == maxHarvest:
+					print(f"In total, you scavenged {endNum} logs")
 				else:
 					print(f'You scavenged {i} logs.')
 			elif inp == len(arr):
@@ -144,6 +146,8 @@ class Inventory:
 					if endNum > maxHarvest:
 						endNum = maxHarvest
 						print(f"In total, you scavenged {endNum} stone")	
+					elif endNum == maxHarvest:
+						print(f"In total, you scavenged {endNum} stone")
 					else:
 						print(f'You scavenged {i} stone.')
 				elif inp == len(arr):
@@ -206,7 +210,9 @@ class Inventory:
 
 				if endNum > maxHarvest:
 					endNum = maxHarvest
-					print(f"In total, you scavenged {endNum} grass")	
+					print(f"In total, you scavenged {endNum} grass")
+				elif endNum == maxHarvest:
+					print(f"In total, you scavenged {endNum} grass")
 				else:
 					print(f'You scavenged {i} grass.')
 			elif inp == len(arr):

@@ -21,14 +21,18 @@ def intOrStr(var):
 		return int(input(var))
 
 	except:
-		print('Please enter a number')
+		print('\nPlease enter a number\n')
 		
 def locationInLine():
 	string = globals.player.location
 	print(string)
 
 def inputPrompt(prompt):
-	return intOrStr(f"<{prompt}> ")
+	var = intOrStr(f"<{prompt}> ")
+	while type(var) != int:
+		var = intOrStr(f"<{prompt}> ")
+	return var
+
 
 def addInt(arrOfSuggestions, map):
 	for i in range(len(arrOfSuggestions)):		
@@ -39,10 +43,11 @@ def inputLines(arr, map = lambda obj: str(obj)):
 	addInt(arr, map)
 	print(" ")
 	output = inputPrompt("turn")
-	globals.player.turn += 1
+	
 	while output > len(arr):
-		print(f"Please enter a number between 1 and {len(arr)}.")
+		print(f"\nPlease enter a number between 1 and {len(arr)}.\n")
 		output = inputPrompt("turn")
+	globals.player.turn += 1
 	print(" ")
 	print('_' * 86)
 	print(f' 										Turn {globals.player.turn} \n')

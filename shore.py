@@ -23,7 +23,7 @@ class ForgottenShore(location.Location):
 
 	def update(self):
 		self.text()
-		location.locationChange([['Explore the wreckage', 'The Wrecked Shore', ''], ['Close your eyes for a little longer', 'death', 'While you rest, a group of savages appear on the beach. Grotesquely dressed, they creep up on you. The one with the mask, clearly the leader, motions them towards you. No one hears your scream as they pummel you.']])
+		location.locationChange([['Explore the wreckage', 'The Wrecked Shore', '', False], ['Close your eyes for a little longer', 'death', 'While you rest, a group of savages appear on the beach. Grotesquely dressed, they creep up on you. The one with the mask, clearly the leader, motions them towards you. No one hears your scream as they pummel you.', False]])
 
 ForgottenShore = ForgottenShore()
 
@@ -33,7 +33,7 @@ class WreckedShore(location.Location):
 
 	def update(self):
 		self.text()
-		location.locationChange([['Watch the shore', 'death', 'You sit among the wreckage of your once beautiful ship and reminisce about the old times. A shell rests in the sand next to you. You pick it up, examining the shell. Suddenly, you realize you are holding a cone snail. Before you can put the shell down and rectify your mistake, you are stabbed. Death is instant and painless.'], ['Walk the path in front of you', 'The Gnarled Path', '']])
+		location.locationChange([['Watch the shore', 'death', 'You sit among the wreckage of your once beautiful ship and reminisce about the old times. A shell rests in the sand next to you. You pick it up, examining the shell. Suddenly, you realize you are holding a cone snail. Before you can put the shell down and rectify your mistake, you are stabbed. Death is instant and painless.', False], ['Walk the path in front of you', 'The Gnarled Path', '', False]])
 
 WreckedShore = WreckedShore()
 
@@ -43,7 +43,7 @@ class GnarledPath(location.Location):
 
 	def update(self):
 		self.text()
-		location.locationChange([['Talk to the old man', "The Old Man", ""], ['Continue along the path', 'The Rocky Base', ""]])
+		location.locationChange([['Talk to the old man', oldMan, "", True], ['Continue along the path', 'The Rocky Base', "", False]])
 	
 GnarledPath = GnarledPath()
 # "When you return the old man is still waiting, leaning on his cane. He gives you a wry grin, as if he knows something about you that you don't."
@@ -51,7 +51,7 @@ class SteepAscent(location.Location):
 	def __init__(self):
 		location.Location.__init__(self, "Abandoned Shoals", "The Steep Ascent", "You start your ascent of the seemingly insurmountable hill.")
 		self.arr = ["The sun is setting fast in the distance.", "What if you throw yourself off? Would it really hurt that much?", "You miss your crew, especially your dog, Wilson.","You climb", "You climb","You climb.", "You climb.", "A mosquito lands on your arm. You smack it before it can bite you. You continue to climb.", "You contemplate life.", "Why would you even trust an old man? You consider turning back.", "A hare hops past, causing you to lose your balance.", "You stop for a second to catch your breath.", "A snake is in the middle of the path.", "You feel extremely dehydrated, and weary with life."] 
-		self.ticker = 30
+		self.ticker = 29
 		self.progress = 'normal'
 	def update(self):
 		while globals.player.location == 'The Steep Ascent':
@@ -121,7 +121,7 @@ class RockyBase(location.Location):
 
 	def update(self):
 		self.text()
-		location.locationChange([["Go back to the shore", "The Gnarled Path", ""], ["Start climbing", "The Steep Ascent", ""]])
+		location.locationChange([["Go back to the shore", "The Gnarled Path", "", False], ["Start climbing", "The Steep Ascent", "", False]])
 
 RockyBase = RockyBase()
 
@@ -129,13 +129,13 @@ class GrassyHill(location.HarvestLocation):
 
 	def __init__(self):
 		location.HarvestLocation.__init__(self, "Abandoned Shoals", "The Grassy Hill", "After a long and arduous climb, you finally reach the summit. You think to yourself: this would make a nice outpost.")
-		self.maxHarvest = 6
+		self.maxHarvest = 15
 
 	def update(self):
 		if self.maxHarvest > 0:
 			inp = input.inputLines(['Whack the grass', 'Go back down the hill'])
 			if (inp == 1):
-				globals.player.inventory.scavengeGrass(2, 4, self.maxHarvest, 5, ["Harvest grass", "Collect it from the ground", "Scavenge for grass"],  ["Relax", "Sit down", "Do nothing", "Fall asleep", "Daydream", "Think about how many rest phrases I can come up with", "Contemplate life", "Stop", "Watch a large, red beetle"])
+				self.maxHarvest -= globals.player.inventory.scavengeGrass(2, 4, self.maxHarvest, 5, ["Harvest grass", "Collect it from the ground", "Scavenge for grass"],  ["Relax", "Sit down", "Do nothing", "Fall asleep", "Daydream", "Contemplate life", "Stop", "Watch a large, red beetle"])
 
 			elif (inp == 2):
 				globals.player.location = 'The Rocky Base'
@@ -174,7 +174,7 @@ def shoreStart(isStart):
 			SteepAscent.update()
 		elif globals.player.location == 'death':
 			globals.player.die()
-
+ 
 
 
 shoreStart(True)

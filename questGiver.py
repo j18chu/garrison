@@ -15,6 +15,7 @@ class QuestGiver():
 
 	def locationBack(self):
 		globals.player.location = self.pLocation
+		self.showOpenText = False
 
 
 	def update(self):
@@ -48,7 +49,8 @@ class QuestGiver():
 		while i < len(arr):
 			if (inp == i):
 				self.quests[i-1].checkIn()
-				self.openName()
+				self.update()
 			i+=1
 		if inp == (i+1):
 			locationBack()
+			print('hello')
