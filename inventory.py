@@ -72,8 +72,8 @@ class Inventory:
 					if (random.randint(1,3) == 1):
 						i += 1
 					else:
-						endNum += i
 						break
+				endNum += i
 
 				if endNum > maxHarvest:
 					endNum = maxHarvest
@@ -140,8 +140,8 @@ class Inventory:
 						if (random.randint(1,3) == 1):
 							i += 1
 						else:
-							endNum += i
 							break
+					endNum += i
 
 					if endNum > maxHarvest:
 						endNum = maxHarvest
@@ -198,16 +198,15 @@ class Inventory:
 
 			arr.append('Back')
 			inp = input.inputLines(arr)
-
 			if inp == inpScavenge:
 				i = minimum
 				while i < maximum:
 					if (random.randint(1,3) == 1):
 						i += 1
 					else:
-						endNum += i
-						break
-
+						break		
+				endNum += i
+				print(endNum)
 				if endNum > maxHarvest:
 					endNum = maxHarvest
 					print(f"In total, you scavenged {endNum} grass")

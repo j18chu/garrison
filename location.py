@@ -11,8 +11,13 @@ class Location:
 
 	def onReturn(self, options):
 		# options = ["Actual text", past Location]
-		pass
+		for i in range(len(options)):
+			if options[i][1] == globals.player.pLocation:
+				print('hello')
+				self.returnText = options[i][0]
 
+	def appendToArray(self):
+		globals.player.map.append(self)
 
 	def text(self):
 		if self.returnText != "":
@@ -50,6 +55,9 @@ class HarvestLocation:
 
 	def onReturn(self, text):
 		pass
+
+	def appendToArray(self):
+		globals.player.map.append(self)
 
 	def text(self):
 		if self.returnText != "":
